@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: aerosend-core
+  datasource:
+    url: jdbc:postgresql://localhost:5432/aerosend
+    username: aerosend
+    password: aerosend
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    locations: classpath:db/migration
+
+aerosend:
+  provisioning:
+    domains-per-batch: 10
+    default-mailboxes-per-domain: 3
+  dns:
+    dkim-selector: aero1
+    dmarc-rua: dmarc-reports@aerosend.io
+
+server:
+  port: 8081

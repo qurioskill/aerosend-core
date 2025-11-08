@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: timescale/timescaledb:2.15.2-pg16
+    environment:
+      POSTGRES_DB: aerosend
+      POSTGRES_USER: aerosend
+      POSTGRES_PASSWORD: aerosend
+    command: ["postgres", "-c", "wal_level=logical"]
+    ports: ["5432:5432"]
+  rabbitmq:
+    image: rabbitmq:3.13-management
+    ports: ["5672:5672", "15672:15672"]
+  debezium:
+    image: quay.io/debezium/server:2.7
+    depends_on: [postgres, rabbitmq]
+    volumes:
+      - ./debezium:/debezium/conf
