@@ -32,6 +32,11 @@ public class DomainController {
         return domains.findByCustomerId(customerId);
     }
 
+    @GetMapping("/summary")
+    public List<DeliverabilityQueries.DomainSummary> summary(@RequestParam Long customerId) {
+        return deliverability.domainSummaries(customerId);
+    }
+
     @PostMapping
     public Domain provision(@RequestBody ProvisionRequest req) {
         return provisioning.provisionDomain(req.customerId(), req.serverBatchId(), req.name());
